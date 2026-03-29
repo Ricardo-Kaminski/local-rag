@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "lightrag": {
+      "command": "C:\\Users\\ricar\\miniconda3\\envs\\local-rag\\python.exe",
+      "args": ["C:\\workspace\\pessoal\\local-rag\\mcp_server.py"],
+      "cwd": "C:\\workspace\\pessoal\\local-rag"
+    }
+  }
+}
