@@ -23,7 +23,7 @@ Sistema RAG 100% local para extração de dados e exploração de documentos pes
 │                  LIGHTRAG SERVER                         │
 │  • Grafo de entidades/relações  (NanoVectorDB local)    │
 │  • Índice vetorial              (NanoVectorDB local)    │
-│  • LLM local                    (Ollama — llama3.1:8b)  │
+│  • LLM local                    (Ollama — qwen2.5:14b)  │
 │  • Embeddings                   (Ollama — nomic-embed)  │
 │  • API REST  http://localhost:9621                       │
 └──────────────┬──────────────────────┬───────────────────┘
@@ -44,7 +44,7 @@ Sistema RAG 100% local para extração de dados e exploração de documentos pes
 | Componente | Tecnologia | Função |
 |---|---|---|
 | RAG Engine | LightRAG (HKUDS) | grafo de conhecimento + vetores |
-| LLM local | Ollama + llama3.1:8b | geração de respostas |
+| LLM local | Ollama + qwen2.5:14b | geração de respostas |
 | Embeddings | Ollama + nomic-embed-text | indexação semântica |
 | Pipeline de ingestão | Python (ingest.py) | processar fontes de dados |
 | Integração Claude Code | MCP server (mcp_server.py) | queries no terminal |
@@ -96,7 +96,7 @@ lightrag:
   working_dir: "C:/workspace/pessoal/local-rag/data/lightrag_storage"
 
 ollama:
-  llm_model: "llama3.1:8b"
+  llm_model: "qwen2.5:14b"
   embedding_model: "nomic-embed-text"
 ```
 
@@ -163,7 +163,7 @@ C:/workspace/pessoal/local-rag/
 $env:OLLAMA_MODELS = "D:\ollama_models"  # PowerShell
 # ou definir como variável de ambiente permanente no Windows
 
-ollama pull llama3.1:8b
+ollama pull qwen2.5:14b
 ollama pull nomic-embed-text
 ```
 
@@ -175,7 +175,7 @@ pip install "lightrag-hku[api]"
 ### 3. Iniciar servidor
 ```bash
 lightrag-server --host 0.0.0.0 --port 9621 \
-  --llm-provider ollama --llm-model llama3.1:8b \
+  --llm-provider ollama --llm-model qwen2.5:14b \
   --embedding-provider ollama --embedding-model nomic-embed-text \
   --working-dir C:/workspace/pessoal/local-rag/data/lightrag_storage
 ```
