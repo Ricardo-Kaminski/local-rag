@@ -1,0 +1,25 @@
+sources:
+  obsidian:
+    path: "D:/Obsidian/vault/"
+    include_all: true
+    extensions: [".md"]
+
+  zotero:
+    path: "D:/_bib_Zotero/"
+    include_all: true
+    extensions: [".pdf", ".bib"]
+
+lightrag:
+  host: "localhost"
+  port: 9621
+  working_dir: "C:/workspace/pessoal/local-rag/data/lightrag_storage"
+
+ollama:
+  llm_model: "llama3.2:3b"
+  embedding_model: "nomic-embed-text"
+
+chunking:
+  chunk_size: 2000
+  overlap: 200
+
+checkpoint_file: "C:/workspace/pessoal/local-rag/data/checkpoint.json"

@@ -1,0 +1,18 @@
+name: local-rag
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+    - lightrag-hku[api]
+    - pymupdf
+    - python-docx
+    - openpyxl
+    - bibtexparser
+    - pyyaml
+    - requests
+    - mcp
+    - pytest
+    - pytest-asyncio

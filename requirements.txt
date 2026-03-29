@@ -1,0 +1,10 @@
+lightrag-hku[api]
+pymupdf
+python-docx
+openpyxl
+bibtexparser
+pyyaml
+requests
+mcp
+pytest
+pytest-asyncio
