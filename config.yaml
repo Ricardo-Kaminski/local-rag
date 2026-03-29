@@ -15,7 +15,7 @@ lightrag:
   working_dir: "C:/workspace/pessoal/local-rag/data/lightrag_storage"
 
 ollama:
-  llm_model: "llama3.2:3b"
+  llm_model: "llama3.1:8b"
   embedding_model: "nomic-embed-text"
 
 chunking:
