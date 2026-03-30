@@ -114,21 +114,72 @@ Now use `query_rag`, `insert_document`, and `rag_health` directly in Claude Code
 
 ---
 
+## Install via pip
+
+```bash
+pip install local-rag
+```
+
+After installation, use the `local-rag` CLI:
+
+```bash
+local-rag ingest          # index all documents once
+local-rag watch           # continuous indexing daemon
+local-rag start           # start LightRAG server + watcher
+local-rag mcp             # start MCP server (for testing)
+```
+
+Configure Claude Code to use the MCP server (add to `~/.claude/settings.json`):
+
+```json
+"mcpServers": {
+  "lightrag": {
+    "command": "local-rag",
+    "args": ["mcp"]
+  }
+}
+```
+
+## Claude Code Plugin
+
+Install directly from Claude Code:
+
+```
+/plugin install local-rag
+```
+
+## MCP Tools (7 total)
+
+| Tool | Description |
+|---|---|
+| `query_rag(question, mode?)` | Query the knowledge base. Modes: `local`, `global`, `hybrid` (default) |
+| `insert_document(path)` | Index a specific file by path |
+| `rag_health()` | Check if LightRAG server is running |
+| `list_sources()` | List configured sources with file counts |
+| `get_indexed_documents(limit?)` | List documents already indexed |
+| `delete_document(doc_id)` | Remove a document from the knowledge base |
+| `get_graph_labels()` | List entity types in the knowledge graph |
+
+## Using Claude API as LLM (optional)
+
+Use Claude instead of Ollama for RAG responses. In `config.yaml`:
+
+```yaml
+llm:
+  provider: "claude"
+  model: "claude-opus-4-6"
+  api_key: ""   # or set ANTHROPIC_API_KEY env var
+```
+
+> Note: Ollama is still required for embeddings (nomic-embed-text). Only the response LLM can be replaced with Claude.
+
+---
+
 ## Guides by Use Case
 
 - [Obsidian users](docs/guides/obsidian.md) — query your personal knowledge base
 - [Zotero users](docs/guides/zotero.md) — search your academic PDF library
 - [Generic documents](docs/guides/generic.md) — any folder of PDFs, Word files, or Markdown
-
----
-
-## MCP Tools
-
-| Tool | Description |
-|---|---|
-| `query_rag(question, mode?)` | Query the knowledge base. Modes: `local`, `global`, `hybrid` (default) |
-| `insert_document(path)` | Index a specific file |
-| `rag_health()` | Check if LightRAG server is running |
 
 ---
 
