@@ -1,4 +1,4 @@
-from src.checkpoint import Checkpoint
+from local_rag.checkpoint import Checkpoint
 
 
 def test_new_file_not_processed(tmp_path):

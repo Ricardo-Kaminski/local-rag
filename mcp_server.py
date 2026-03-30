@@ -3,10 +3,10 @@ import os
 from mcp.server import Server
 from mcp.server.stdio import stdio_server
 from mcp import types
-from src.config_loader import load_config
-from src.lightrag_client import LightRAGClient, LightRAGError
-from src.extractor import extract_text, UnsupportedFormatError
-from src.chunker import chunk_text
+from local_rag.config_loader import load_config
+from local_rag.lightrag_client import LightRAGClient, LightRAGError
+from local_rag.extractor import extract_text, UnsupportedFormatError
+from local_rag.chunker import chunk_text
 
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.yaml")
 config = load_config(CONFIG_PATH)

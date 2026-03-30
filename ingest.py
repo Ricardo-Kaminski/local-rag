@@ -1,11 +1,11 @@
 import os
 import sys
 import argparse
-from src.config_loader import load_config
-from src.extractor import extract_text, UnsupportedFormatError
-from src.chunker import chunk_text
-from src.checkpoint import Checkpoint
-from src.lightrag_client import LightRAGClient, LightRAGError
+from local_rag.config_loader import load_config
+from local_rag.extractor import extract_text, UnsupportedFormatError
+from local_rag.chunker import chunk_text
+from local_rag.checkpoint import Checkpoint
+from local_rag.lightrag_client import LightRAGClient, LightRAGError
 
 
 def discover_files(source_cfg: dict) -> list:

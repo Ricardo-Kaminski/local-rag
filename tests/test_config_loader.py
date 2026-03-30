@@ -1,6 +1,6 @@
 import pytest
 import yaml
-from src.config_loader import load_config, ConfigError
+from local_rag.config_loader import load_config, ConfigError
 
 VALID_CONFIG = {
     "sources": {

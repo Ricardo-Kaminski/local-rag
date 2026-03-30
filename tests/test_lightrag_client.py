@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import patch
-from src.lightrag_client import LightRAGClient, LightRAGError
+from local_rag.lightrag_client import LightRAGClient, LightRAGError
 
 
 @pytest.fixture

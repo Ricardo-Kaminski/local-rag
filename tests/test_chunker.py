@@ -1,4 +1,4 @@
-from src.chunker import chunk_text
+from local_rag.chunker import chunk_text
 
 
 def test_short_text_single_chunk():

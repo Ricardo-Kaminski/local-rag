@@ -1,6 +1,6 @@
 import pytest
 import os
-from src.extractor import extract_text, UnsupportedFormatError
+from local_rag.extractor import extract_text, UnsupportedFormatError
 
 FIXTURES = os.path.join(os.path.dirname(__file__), "fixtures")
 
