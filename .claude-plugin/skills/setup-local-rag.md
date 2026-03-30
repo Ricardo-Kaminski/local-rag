@@ -30,7 +30,7 @@ ollama pull nomic-embed-text   # Embeddings (~300MB)
 ### 3. Install local-rag
 
 ```bash
-pip install local-rag
+pip install local-rag-stack
 ```
 
 ### 4. Create config.yaml

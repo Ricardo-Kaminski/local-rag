@@ -117,7 +117,7 @@ Now use `query_rag`, `insert_document`, and `rag_health` directly in Claude Code
 ## Install via pip
 
 ```bash
-pip install local-rag
+pip install local-rag-stack
 ```
 
 After installation, use the `local-rag` CLI:

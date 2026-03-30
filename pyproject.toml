@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "local-rag"
+name = "local-rag-stack"
 version = "0.1.0"
 description = "100% local RAG for Obsidian, Zotero, and Claude Code — LightRAG + Ollama + MCP"
 readme = "README.md"
