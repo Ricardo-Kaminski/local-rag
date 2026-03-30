@@ -1,7 +1,22 @@
+# Configuração pessoal (copie config.example.yaml → config.yaml e adapte)
+config.yaml
+
+# Storage do LightRAG (grafo + vetores — pode ser gigabytes)
 data/
+D:/local-rag-storage/
+
+# Checkpoint (rastreia arquivos já processados)
+*.json
+
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
 .env
-*.log
-checkpoint.json
-.conda/
+
+# OS
+.DS_Store
+Thumbs.db

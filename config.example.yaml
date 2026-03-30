@@ -1,0 +1,32 @@
+# Copie este arquivo para config.yaml e ajuste os caminhos para sua máquina.
+# config.yaml está no .gitignore — suas configurações pessoais nunca serão commitadas.
+
+sources:
+  # Exemplo: Obsidian vault
+  obsidian:
+    path: "/path/to/your/obsidian/vault"   # ex: D:/Obsidian/vault/
+    include_all: true
+    extensions: [".md"]
+
+  # Exemplo: Zotero storage
+  zotero:
+    path: "/path/to/your/zotero/storage"   # ex: D:/_bib_Zotero/storage/
+    include_all: true
+    extensions: [".pdf"]
+
+  # Adicione quantas fontes quiser seguindo o mesmo padrão
+
+lightrag:
+  host: "localhost"
+  port: 9621
+  working_dir: "/path/to/lightrag/storage"  # onde o grafo e vetores serão salvos
+
+ollama:
+  llm_model: "qwen2.5:14b"          # requer ~8GB VRAM. Alternativa: llama3.2:3b
+  embedding_model: "nomic-embed-text"
+
+chunking:
+  chunk_size: 2000   # tokens por chunk
+  overlap: 200       # tokens de sobreposição entre chunks
+
+checkpoint_file: "/path/to/local-rag/data/checkpoint.json"
