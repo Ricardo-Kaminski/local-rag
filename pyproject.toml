@@ -21,9 +21,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/RicardoKaminski/local-rag"
-Repository = "https://github.com/RicardoKaminski/local-rag"
-Issues = "https://github.com/RicardoKaminski/local-rag/issues"
+Homepage = "https://github.com/Ricardo-Kaminski/local-rag"
+Repository = "https://github.com/Ricardo-Kaminski/local-rag"
+Issues = "https://github.com/Ricardo-Kaminski/local-rag/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src"]

@@ -72,7 +72,7 @@ pip install "lightrag-hku[api]"
 ### 3. Clone and configure
 
 ```bash
-git clone https://github.com/RicardoKaminski/local-rag
+git clone https://github.com/Ricardo-Kaminski/local-rag
 cd local-rag
 cp config.example.yaml config.yaml
 # Edit config.yaml with your paths
@@ -152,7 +152,7 @@ If you already have a LightRAG instance running, install the standalone MCP pack
 pip install lightrag-mcp
 ```
 
-See [lightrag-mcp](https://github.com/RicardoKaminski/lightrag-mcp) for details.
+See [lightrag-mcp](https://github.com/Ricardo-Kaminski/lightrag-mcp) for details.
 
 ---
 
