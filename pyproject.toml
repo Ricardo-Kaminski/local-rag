@@ -5,10 +5,19 @@ build-backend = "hatchling.build"
 [project]
 name = "local-rag"
 version = "0.1.0"
-description = "100% local RAG for Obsidian, Zotero, and Claude Code — powered by LightRAG + Ollama"
+description = "100% local RAG for Obsidian, Zotero, and Claude Code — LightRAG + Ollama + MCP"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.11"
+keywords = ["rag", "local-llm", "ollama", "lightrag", "mcp", "claude", "obsidian", "zotero", "knowledge-graph"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
 dependencies = [
     "lightrag-hku[api]",
     "pymupdf",
@@ -18,12 +27,17 @@ dependencies = [
     "pyyaml",
     "requests",
     "mcp",
+    "click>=8.0",
 ]
+
+[project.scripts]
+local-rag = "local_rag.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/Ricardo-Kaminski/local-rag"
 Repository = "https://github.com/Ricardo-Kaminski/local-rag"
 Issues = "https://github.com/Ricardo-Kaminski/local-rag/issues"
+Documentation = "https://github.com/Ricardo-Kaminski/local-rag/tree/main/docs/guides"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src"]
+packages = ["local_rag"]
