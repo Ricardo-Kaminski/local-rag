@@ -53,7 +53,38 @@ async def list_tools() -> list[types.Tool]:
             name="rag_health",
             description="Verifica se o servidor LightRAG está online",
             inputSchema={"type": "object", "properties": {}}
-        )
+        ),
+        types.Tool(
+            name="list_sources",
+            description="Lista as fontes configuradas e quantos arquivos cada uma tem",
+            inputSchema={"type": "object", "properties": {}}
+        ),
+        types.Tool(
+            name="get_indexed_documents",
+            description="Lista os documentos já indexados no LightRAG",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "limit": {"type": "integer", "description": "Máximo de documentos a retornar (padrão: 20)", "default": 20}
+                }
+            }
+        ),
+        types.Tool(
+            name="delete_document",
+            description="Remove um documento da base RAG pelo ID",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "doc_id": {"type": "string", "description": "ID do documento (obtido via get_indexed_documents)"}
+                },
+                "required": ["doc_id"]
+            }
+        ),
+        types.Tool(
+            name="get_graph_labels",
+            description="Lista os tipos de entidade presentes no grafo de conhecimento",
+            inputSchema={"type": "object", "properties": {}}
+        ),
     ]
 
 
@@ -86,6 +117,68 @@ async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
         ok = client.health_check()
         status = "online" if ok else "offline"
         return [types.TextContent(type="text", text=f"LightRAG server: {status}")]
+
+    elif name == "list_sources":
+        import os as _os
+        lines = []
+        for source_name, source_cfg in config["sources"].items():
+            path = source_cfg["path"]
+            extensions = source_cfg.get("extensions", [])
+            if _os.path.exists(path):
+                count = sum(
+                    1 for root, _, files in _os.walk(path)
+                    for f in files
+                    if not extensions or _os.path.splitext(f)[1].lower() in extensions
+                )
+                lines.append(f"• {source_name}: {path} ({count} files, exts: {extensions})")
+            else:
+                lines.append(f"• {source_name}: {path} (NOT FOUND)")
+        return [types.TextContent(type="text", text="\n".join(lines) or "No sources configured.")]
+
+    elif name == "get_indexed_documents":
+        import requests as _req
+        limit = arguments.get("limit", 20)
+        base = f"http://{config['lightrag']['host']}:{config['lightrag']['port']}"
+        try:
+            r = _req.get(f"{base}/documents", params={"limit": limit}, timeout=10)
+            if r.status_code != 200:
+                return [types.TextContent(type="text", text=f"Error: {r.status_code} {r.text}")]
+            docs = r.json()
+            if not docs:
+                return [types.TextContent(type="text", text="No documents indexed yet.")]
+            lines = [
+                f"• {d.get('id', '?')} — {d.get('content_summary', d.get('file_path', '?'))}"
+                for d in docs[:limit]
+            ]
+            return [types.TextContent(type="text", text="\n".join(lines))]
+        except Exception as e:
+            return [types.TextContent(type="text", text=f"Error fetching documents: {e}")]
+
+    elif name == "delete_document":
+        import requests as _req
+        doc_id = arguments["doc_id"]
+        base = f"http://{config['lightrag']['host']}:{config['lightrag']['port']}"
+        try:
+            r = _req.delete(f"{base}/documents/{doc_id}", timeout=10)
+            if r.status_code in (200, 204):
+                return [types.TextContent(type="text", text=f"Document {doc_id} deleted.")]
+            return [types.TextContent(type="text", text=f"Error: {r.status_code} {r.text}")]
+        except Exception as e:
+            return [types.TextContent(type="text", text=f"Error deleting document: {e}")]
+
+    elif name == "get_graph_labels":
+        import requests as _req
+        base = f"http://{config['lightrag']['host']}:{config['lightrag']['port']}"
+        try:
+            r = _req.get(f"{base}/graph/label/list", timeout=10)
+            if r.status_code != 200:
+                return [types.TextContent(type="text", text=f"Error: {r.status_code} {r.text}")]
+            labels = r.json()
+            if not labels:
+                return [types.TextContent(type="text", text="No entity types found in graph yet.")]
+            return [types.TextContent(type="text", text="Entity types in knowledge graph:\n" + "\n".join(f"• {l}" for l in labels))]
+        except Exception as e:
+            return [types.TextContent(type="text", text=f"Error fetching graph labels: {e}")]
 
     return [types.TextContent(type="text", text=f"Unknown tool: {name}")]
 

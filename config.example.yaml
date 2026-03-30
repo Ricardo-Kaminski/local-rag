@@ -25,6 +25,16 @@ ollama:
   llm_model: "qwen2.5:14b"          # requer ~8GB VRAM. Alternativa: llama3.2:3b
   embedding_model: "nomic-embed-text"
 
+# Provider do LLM: "ollama" (padrão, local) ou "claude" (Anthropic API)
+# O embedding sempre usa Ollama (nomic-embed-text) independente do provider.
+llm:
+  provider: "ollama"        # ollama | claude
+
+  # --- Configuração Claude (descomente e preencha para usar) ---
+  # provider: "claude"
+  # model: "claude-opus-4-6"        # claude-opus-4-6 | claude-sonnet-4-6 | claude-haiku-4-5
+  # api_key: ""                      # ou defina ANTHROPIC_API_KEY como variável de ambiente
+
 chunking:
   chunk_size: 2000   # tokens por chunk
   overlap: 200       # tokens de sobreposição entre chunks
